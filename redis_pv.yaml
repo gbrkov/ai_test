@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   name: gkovacs-pv1
 spec:
-  storageClassName: local-storage
+  storageClassName: gkovacs-local-storage
   capacity:
     storage: 1Gi
   accessModes:
@@ -18,7 +18,7 @@ kind: PersistentVolume
 metadata:
   name: gkovacs-pv2
 spec:
-  storageClassName: local-storage
+  storageClassName: gkovacs-local-storage
   capacity:
     storage: 1Gi
   accessModes:
@@ -33,7 +33,7 @@ kind: PersistentVolume
 metadata:
   name: gkovacs-pv3
 spec:
-  storageClassName: local-storage
+  storageClassName: gkovacs-local-storage
   capacity:
     storage: 2Gi
   accessModes:
