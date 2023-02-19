@@ -52,3 +52,9 @@ kubectl get ns ${namesp}
 
 echo "* here is your minikube:"
 kubectl get pods --all-namespaces -o wide
+
+echo "* creating the redis storage, define storage class"
+kubectl apply -f redis_storage.yaml
+
+echo "* storage classes:"
+kubectl get sc
