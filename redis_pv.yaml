@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: local-storage
   capacity:
-    storage: 100M
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -20,7 +20,7 @@ metadata:
 spec:
   storageClassName: local-storage
   capacity:
-    storage: 100M
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -35,7 +35,7 @@ metadata:
 spec:
   storageClassName: local-storage
   capacity:
-    storage: 200M
+    storage: 2Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
