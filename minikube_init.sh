@@ -58,3 +58,8 @@ kubectl apply -f redis_storage.yaml
 
 echo "* storage classes:"
 kubectl get sc
+
+echo "* Create redis persistentVolumes" 
+kubectl apply -f redis_pv.yaml
+
+kubectl get pv
