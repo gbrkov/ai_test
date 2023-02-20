@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: gkovacs-redis
+  name: redis
 spec:
   serviceName: redis
   replicas: 3
   selector:
     matchLabels:
-      app: gkovacs-redis
+      app: redis
   template:
     metadata:
       labels:
-        app: gkovacs-redis
+        app: redis
     spec:
       initContainers:
-      - name: gkovacs-redis-config
-        image: redis:6.2.10-alpine
+      - name: config
+        image: redis:6.2.3-alpine
         command: [ "sh", "-c" ]
         args:
           - |
@@ -39,35 +39,35 @@ spec:
               echo "slaveof $MASTER 6379" >> /etc/redis/redis.conf
             fi
         volumeMounts:
-        - name: gkovacs-redis-config
+        - name: redis-config
           mountPath: /etc/redis/
-        - name: gkovacs-redis-config
+        - name: config
           mountPath: /tmp/redis/
       containers:
-      - name: gkovacs-redis
+      - name: redis
         image: redis:6.2.3-alpine
         command: ["redis-server"]
         args: ["/etc/redis/redis.conf"]
         ports:
         - containerPort: 6379
-          name: gkovacs-redis
+          name: redis
         volumeMounts:
         - name: data
           mountPath: /data
-        - name: gkovacs-redis-config
+        - name: redis-config
           mountPath: /etc/redis/
       volumes:
-      - name: gkovacs-redis-config
+      - name: redis-config
         emptyDir: {}
-      - name: gkovacs-config
+      - name: config
         configMap:
-          name: gkovacs-redis-config
+          name: redis-config
   volumeClaimTemplates:
   - metadata:
       name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "gkovacs-local-storage"
+      storageClassName: "local-storage"
       resources:
         requests:
           storage: 500Mi
