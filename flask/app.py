@@ -3,6 +3,7 @@ from redis import Redis
 
 app = Flask(__name__)
 redis = Redis(host='redis', port=6379)
+GIT_VERSION=
 
 @app.route('/healthz')
 def health_z():
@@ -21,10 +22,8 @@ def counter_get():
     return counter
 
 @app.route('/version')
-def hello():
-    redis.incr('hit')
-    counter = str(redis.get('hit'),'utf-8')
-    return "This webpage has been viewed "+counter+" time(s)"
+def ver():
+   return GIT_VERSION
 
 
 

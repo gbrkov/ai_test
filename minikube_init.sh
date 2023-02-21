@@ -98,19 +98,22 @@ kubectl apply -n ${namesp} -f redis_service.yaml
 
 ## build docker image to flask service
 
-docker build -t gkovacs/flask_test ./flask
+docker build -t gkovacs/flask_test ./flask --build-arg GIT_COMMIT=$(git rev-parse --short HEAD)
+
 docker image list | grep gkovacs
 
-#echo "** start minikube tunnel to get balancer external port, to this need root password"
-#echo "* more info: https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-tunnel"
-#minikube tunnel &>/dev/null
+echo "** start minikube tunnel to get balancer external port, to this need root password"
+echo "* more info: https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-tunnel"
+minikube tunnel -c &>/dev/null
 
 kubectl apply -f flaskapp_service.yaml -n ${namesp}
 
 kubectl apply -f flask_app.yaml -n ${namesp}
 
 watch "echo '#############################################################################\n \
-this is a watch session, you can exit with ctrl + c and continue this script \n \
+this is a watch session, you can exit with ctrl + c and continue this script\n\
 #############################################################################\n\n\n' & kubectl get pods -n ${namesp}"
 
 
+
+echo "* application scale with:  kubectl scale -n ${namesp} rs/flaskapp --replicas=10"
