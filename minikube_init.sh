@@ -1,3 +1,5 @@
+
+
 reqs="kubectl docker minikube docker"
 
 echo "* Start checking requirements: $req"
@@ -98,7 +100,10 @@ kubectl apply -n ${namesp} -f redis_service.yaml
 
 ## build docker image to flask service
 
-docker build -t gkovacs/flask_test ./flask --build-arg GIT_COMMIT=$(git rev-parse --short HEAD)
+export GCV=$(git rev-parse --short HEAD)
+sed -i "s/GIT_VERSION=.*$/GIT_VERSION=${GCV}/" ./flask/app.py
+
+docker build -t gkovacs/flask_test ./flask
 
 docker image list | grep gkovacs
 
