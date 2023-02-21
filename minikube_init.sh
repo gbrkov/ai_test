@@ -101,7 +101,7 @@ kubectl apply -n ${namesp} -f redis_service.yaml
 ## build docker image to flask service
 
 export GCV=$(git rev-parse --short HEAD)
-sed -i "s/GIT_VERSION=.*$/GIT_VERSION=${GCV}/" ./flask/app.py
+sed -i "s/GIT_VERSION=.*$/GIT_VERSION=\"${GCV}\"/" ./flask/app.py
 
 docker build -t gkovacs/flask_test ./flask
 
