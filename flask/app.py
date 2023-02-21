@@ -3,6 +3,7 @@ from redis import Redis
 
 app = Flask(__name__)
 redis = Redis(host='redis', port=6379)
+redis_master = Redis(host='redis-master', port=6379)
 GIT_VERSION=
 
 @app.route('/healthz')
@@ -11,14 +12,14 @@ def health_z():
 
 @app.route('/alert')
 def alert_incr():
-    redis.incr('hit')
+    redis_master.incr('hit')
     return ""
 
 @app.route('/counter')
 def counter_get():
     counter="0"
     if redis.exists("hit"):
-        counter = str(redis_r.get('hit'),'utf-8')
+        counter = str(redis.get('hit'),'utf-8')
     return counter
 
 @app.route('/version')

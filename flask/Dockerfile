@@ -6,8 +6,12 @@ LABEL CREATOR=GKOVACS
 WORKDIR /app
 # Copying all the application files to the working directory
 COPY requirements.txt /app
+
 # Install all the dependencies required to run the Flask application
 RUN pip install -r requirements.txt
+
+RUN apk add curl
+RUN apk add nano
 
 COPY . /app
 

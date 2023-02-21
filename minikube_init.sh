@@ -94,9 +94,11 @@ echo "* set up redis instances"
 kubectl apply -n ${namesp} -f redis_statefulset.yaml
 
 
-#echo "* create headless service"
+echo "* create headless service"
 kubectl apply -n ${namesp} -f redis_service.yaml
 
+echo "* create headless master service"
+kubectl apply -n ${namesp} -f redis_service_master.yaml
 
 ## build docker image to flask service
 
