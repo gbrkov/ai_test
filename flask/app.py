@@ -4,7 +4,7 @@ from redis import Redis
 app = Flask(__name__)
 redis = Redis(host='redis', port=6379)
 redis_master = Redis(host='redis-master', port=6379)
-GIT_VERSION=
+GIT_VERSION="37517de"
 
 @app.route('/healthz')
 def health_z():

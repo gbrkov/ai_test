@@ -109,9 +109,9 @@ docker build -t gkovacs/flask_test ./flask
 
 docker image list | grep gkovacs
 
-echo "** start minikube tunnel to get balancer external port, to this need root password"
-echo "* more info: https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-tunnel"
-minikube tunnel -c &>/dev/null
+#echo "** start minikube tunnel to get balancer external port, to this need root password"
+#echo "* more info: https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-tunnel"
+#minikube tunnel -c &>/dev/null
 
 kubectl apply -f flaskapp_service.yaml -n ${namesp}
 
@@ -124,3 +124,16 @@ this is a watch session, you can exit with ctrl + c and continue this script\n\
 
 
 echo "* application scale with:  kubectl scale -n ${namesp} rs/flaskapp --replicas=10"
+
+
+cd prometheus
+./start.sh
+
+cd ../grafana
+./start.sh
+
+cd ../metrics
+./start.sh
+
+cd ../alert
+./start.sh

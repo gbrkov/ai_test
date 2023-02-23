@@ -9,3 +9,6 @@ kubectl delete pv local-pv2
 kubectl delete pv local-pv3
 
 kubectl delete sc local-storage
+
+kubectl delete ns monitoring
+
