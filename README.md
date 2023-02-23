@@ -3,11 +3,11 @@ This project show how you can use kubernetes with custom app which is using redi
 
 Project start with start_all.sh script. This request default namespace and after deploy a redis flask app and monitoring things into monitoring namespace.
 
-Redis is runnig in cluster master and 2 slave instance defult with local storage.
+Redis is runnig in cluster master and 2 slave instance and they are using a local storage to keep data after instance kill/restart.
 
-Flask app is using redis master instance with balancer to write and all redis instance with balancer for read.
+Flask apps are using redis master instance with balancer url to write and all redis instances with balancer for read data.
 
-Flask app run 2 instance default bt youcaresize with:
+Flask app run 2 instance default but you can resize with:
 
 kubectl scale -n ${namespace} rs/flaskapp --replicas=10
 
@@ -31,6 +31,7 @@ curl localhost:8000/alert
 curl localhost:8000/counter
 
 curl localhost:8000/version
+
 commands.
 
 prometheus grafana alerting and alerting install with default config. (Currently not working the alerting system and dashboard)
